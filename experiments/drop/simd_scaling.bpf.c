@@ -225,6 +225,83 @@ int simd_32(struct xdp_md *ctx)
 
 
 /*
+ * 40 coppie ADD/XOR
+ */
+SEC("xdp")
+int simd_40(struct xdp_md *ctx)
+{
+	void *data;
+	if (!bounds_check(ctx, &data))
+	   return XDP_DROP;
+
+	bpf_zmm a = __builtin_bpf_simd_load(data);
+	bpf_zmm b = __builtin_bpf_simd_load(data + 64);
+
+	bpf_zmm res = a;
+#pragma unroll
+	for (int i = 0; i<40; i++){
+	    res = __builtin_bpf_simd_add(res, b);
+	    res = __builtin_bpf_simd_xor(res, b);
+
+	}
+	__builtin_bpf_simd_store(data + 128, res);
+	
+	return XDP_PASS;	
+}
+
+
+
+/*
+ * 48 coppie ADD/XOR
+ */
+SEC("xdp")
+int simd_48(struct xdp_md *ctx)
+{
+	void *data;
+	if (!bounds_check(ctx, &data))
+	   return XDP_DROP;
+
+	bpf_zmm a = __builtin_bpf_simd_load(data);
+	bpf_zmm b = __builtin_bpf_simd_load(data + 64);
+
+	bpf_zmm res = a;
+#pragma unroll
+	for (int i = 0; i<48; i++){
+	    res = __builtin_bpf_simd_add(res, b);
+	    res = __builtin_bpf_simd_xor(res, b);
+
+	}
+	__builtin_bpf_simd_store(data + 128, res);
+	
+	return XDP_PASS;	
+}
+
+/*
+ * 56 coppie ADD/XOR
+ */
+SEC("xdp")
+int simd_56(struct xdp_md *ctx)
+{
+	void *data;
+	if (!bounds_check(ctx, &data))
+	   return XDP_DROP;
+
+	bpf_zmm a = __builtin_bpf_simd_load(data);
+	bpf_zmm b = __builtin_bpf_simd_load(data + 64);
+
+	bpf_zmm res = a;
+#pragma unroll
+	for (int i = 0; i<56; i++){
+	    res = __builtin_bpf_simd_add(res, b);
+	    res = __builtin_bpf_simd_xor(res, b);
+
+	}
+	__builtin_bpf_simd_store(data + 128, res);
+	
+	return XDP_PASS;	
+}
+
+/*
  * 64 coppie ADD/XOR
  */
 SEC("xdp")
@@ -251,5 +328,82 @@ int simd_64(struct xdp_md *ctx)
     return XDP_PASS;
 }
 
+
+
+/*
+ * 80 coppie ADD/XOR
+ */
+SEC("xdp")
+int simd_80(struct xdp_md *ctx)
+{
+	void *data;
+	if (!bounds_check(ctx, &data))
+	   return XDP_DROP;
+
+	bpf_zmm a = __builtin_bpf_simd_load(data);
+	bpf_zmm b = __builtin_bpf_simd_load(data + 64);
+
+	bpf_zmm res = a;
+#pragma unroll
+	for (int i = 0; i<80; i++){
+	    res = __builtin_bpf_simd_add(res, b);
+	    res = __builtin_bpf_simd_xor(res, b);
+
+	}
+	__builtin_bpf_simd_store(data + 128, res);
+	
+	return XDP_PASS;	
+}
+
+
+/*
+ * 96 coppie ADD/XOR
+ */
+SEC("xdp")
+int simd_96(struct xdp_md *ctx)
+{
+	void *data;
+	if (!bounds_check(ctx, &data))
+	   return XDP_DROP;
+
+	bpf_zmm a = __builtin_bpf_simd_load(data);
+	bpf_zmm b = __builtin_bpf_simd_load(data + 64);
+
+	bpf_zmm res = a;
+#pragma unroll
+	for (int i = 0; i<96; i++){
+	    res = __builtin_bpf_simd_add(res, b);
+	    res = __builtin_bpf_simd_xor(res, b);
+
+	}
+	__builtin_bpf_simd_store(data + 128, res);
+	
+	return XDP_PASS;	
+}
+
+/*
+ * 128 coppie ADD/XOR
+ */
+SEC("xdp")
+int simd_128(struct xdp_md *ctx)
+{
+	void *data;
+	if (!bounds_check(ctx, &data))
+	   return XDP_DROP;
+
+	bpf_zmm a = __builtin_bpf_simd_load(data);
+	bpf_zmm b = __builtin_bpf_simd_load(data + 64);
+
+	bpf_zmm res = a;
+#pragma unroll
+	for (int i = 0; i<128; i++){
+	    res = __builtin_bpf_simd_add(res, b);
+	    res = __builtin_bpf_simd_xor(res, b);
+
+	}
+	__builtin_bpf_simd_store(data + 128, res);
+	
+	return XDP_PASS;	
+}
 
 char LICENSE[] SEC("license") = "GPL";

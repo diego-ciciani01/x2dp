@@ -247,6 +247,9 @@ int main(int argc, char **argv)
         }
     }
 
+    printf("PID=%d, program loaded. Press ENTER to exit...\n",
+	  getpid());
+    getchar();
     bpf_object__close(obj);
 
     return 0;
